@@ -1,12 +1,16 @@
-﻿using System;
+﻿using ContosoUniversity.Features.Instructors;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using ContosoUniversity.Features.Instructors;
 
 namespace ContosoUniversity.Models
 {
+    public class Teacher : Person
+    {
+        public List<Student> Students { get; set; }
+    }
+
     public class Instructor : Person
     {
         [DataType(DataType.Date)]

@@ -35,7 +35,7 @@ namespace ContosoUniversity.Features.Departments
             private readonly SchoolContext _context;
 
             public QueryHandler(SchoolContext context) => _context = context;
-
+            //TODO : 06 - SQL Projection
             protected override Task<Model> HandleCore(Query message) => _context.Departments
                 .FromSql(@"SELECT * FROM Department WHERE DepartmentID = {0}", message.Id)
                 .ProjectTo<Model>()

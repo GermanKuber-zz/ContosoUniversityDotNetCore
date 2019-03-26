@@ -1,13 +1,12 @@
 ﻿namespace ContosoUniversity.IntegrationTests.Features.Instructors
 {
-    using System;
-    using System.Collections.Generic;
-    using Microsoft.EntityFrameworkCore;
-    using System.Linq;
-    using System.Threading.Tasks;
     using ContosoUniversity.Features.Instructors;
+    using Microsoft.EntityFrameworkCore;
     using Models;
     using Shouldly;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Xunit;
     using static SliceFixture;
 
@@ -44,7 +43,7 @@
                 LastName = "Seinfeld",
                 HireDate = DateTime.Today,
                 OfficeAssignmentLocation = "Houston",
-                SelectedCourses = new [] {english101.Id.ToString(), english201.Id.ToString()}
+                SelectedCourses = new[] { english101.Id.ToString(), english201.Id.ToString() }
             };
 
             var id = await SendAsync(command);

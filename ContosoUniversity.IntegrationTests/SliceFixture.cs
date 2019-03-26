@@ -1,15 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using ContosoUniversity.Data;
+﻿using ContosoUniversity.Data;
 using ContosoUniversity.Models;
-using FakeItEasy;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Respawn;
+using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.IntegrationTests
 {
@@ -83,16 +81,16 @@ namespace ContosoUniversity.IntegrationTests
             }
         }
 
-        public static Task ExecuteDbContextAsync(Func<SchoolContext, Task> action) 
+        public static Task ExecuteDbContextAsync(Func<SchoolContext, Task> action)
             => ExecuteScopeAsync(sp => action(sp.GetService<SchoolContext>()));
 
-        public static Task ExecuteDbContextAsync(Func<SchoolContext, IMediator, Task> action) 
+        public static Task ExecuteDbContextAsync(Func<SchoolContext, IMediator, Task> action)
             => ExecuteScopeAsync(sp => action(sp.GetService<SchoolContext>(), sp.GetService<IMediator>()));
 
-        public static Task<T> ExecuteDbContextAsync<T>(Func<SchoolContext, Task<T>> action) 
+        public static Task<T> ExecuteDbContextAsync<T>(Func<SchoolContext, Task<T>> action)
             => ExecuteScopeAsync(sp => action(sp.GetService<SchoolContext>()));
 
-        public static Task<T> ExecuteDbContextAsync<T>(Func<SchoolContext, IMediator, Task<T>> action) 
+        public static Task<T> ExecuteDbContextAsync<T>(Func<SchoolContext, IMediator, Task<T>> action)
             => ExecuteScopeAsync(sp => action(sp.GetService<SchoolContext>(), sp.GetService<IMediator>()));
 
         public static Task InsertAsync<T>(params T[] entities) where T : class
@@ -117,7 +115,7 @@ namespace ContosoUniversity.IntegrationTests
             });
         }
 
-        public static Task InsertAsync<TEntity, TEntity2>(TEntity entity, TEntity2 entity2) 
+        public static Task InsertAsync<TEntity, TEntity2>(TEntity entity, TEntity2 entity2)
             where TEntity : class
             where TEntity2 : class
         {
@@ -130,7 +128,7 @@ namespace ContosoUniversity.IntegrationTests
             });
         }
 
-        public static Task InsertAsync<TEntity, TEntity2, TEntity3>(TEntity entity, TEntity2 entity2, TEntity3 entity3) 
+        public static Task InsertAsync<TEntity, TEntity2, TEntity3>(TEntity entity, TEntity2 entity2, TEntity3 entity3)
             where TEntity : class
             where TEntity2 : class
             where TEntity3 : class
@@ -145,7 +143,7 @@ namespace ContosoUniversity.IntegrationTests
             });
         }
 
-        public static Task InsertAsync<TEntity, TEntity2, TEntity3, TEntity4>(TEntity entity, TEntity2 entity2, TEntity3 entity3, TEntity4 entity4) 
+        public static Task InsertAsync<TEntity, TEntity2, TEntity3, TEntity4>(TEntity entity, TEntity2 entity2, TEntity3 entity3, TEntity4 entity4)
             where TEntity : class
             where TEntity2 : class
             where TEntity3 : class

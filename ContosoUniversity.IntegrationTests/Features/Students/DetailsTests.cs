@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using ContosoUniversity.Features.Students;
+﻿using ContosoUniversity.Features.Students;
 using ContosoUniversity.Models;
 using Shouldly;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 using static ContosoUniversity.IntegrationTests.SliceFixture;
 
@@ -69,7 +68,7 @@ namespace ContosoUniversity.IntegrationTests.Features.Students
             };
             await InsertAsync(enrollment1, enrollment2);
 
-            var details = await SendAsync(new Details.Query {Id = studentId});
+            var details = await SendAsync(new Details.Query { Id = studentId });
 
             details.ShouldNotBeNull();
             details.FirstMidName.ShouldBe(command.FirstMidName);

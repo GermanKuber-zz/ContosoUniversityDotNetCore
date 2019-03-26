@@ -1,16 +1,16 @@
 ﻿namespace ContosoUniversity.IntegrationTests.Features.Instructors
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using ContosoUniversity.Features.Instructors;
     using Models;
     using Shouldly;
+    using System;
+    using System.Threading.Tasks;
     using Xunit;
     using static SliceFixture;
 
     public class DetailsTests : IntegrationTestBase
     {
+        //TODO : 11 - Integration Tests
         [Fact]
         public async Task Should_get_instructor_details()
         {

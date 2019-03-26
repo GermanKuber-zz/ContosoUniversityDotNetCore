@@ -1,11 +1,10 @@
 ﻿namespace ContosoUniversity.IntegrationTests.Features.Departments
 {
-    using System;
-    using Microsoft.EntityFrameworkCore;
-    using System.Threading.Tasks;
     using ContosoUniversity.Features.Departments;
     using Models;
     using Shouldly;
+    using System;
+    using System.Threading.Tasks;
     using Xunit;
     using static SliceFixture;
 

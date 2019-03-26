@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper.QueryableExtensions;
+﻿using AutoMapper.QueryableExtensions;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.Features.Instructors
 {
+    //TODO : 02 - Complex Query
+
     public class Index
     {
         public class Query : IRequest<Model>
         {
             public int? Id { get; set; }
-            public int? CourseID { get; set; }
+            public int? CourseId { get; set; }
         }
 
         public class Model
         {
-            public int? InstructorID { get; set; }
-            public int? CourseID { get; set; }
+            public int? InstructorId { get; set; }
+            public int? CourseId { get; set; }
 
             public IList<Instructor> Instructors { get; set; }
             public IList<Course> Courses { get; set; }
@@ -30,7 +32,7 @@ namespace ContosoUniversity.Features.Instructors
 
             public class Instructor
             {
-                public int ID { get; set; }
+                public int Id { get; set; }
 
                 [Display(Name = "Last Name")]
                 public string LastName { get; set; }
@@ -49,7 +51,7 @@ namespace ContosoUniversity.Features.Instructors
 
             public class CourseAssignment
             {
-                public int CourseID { get; set; }
+                public int CourseId { get; set; }
                 public string CourseTitle { get; set; }
             }
 
@@ -81,14 +83,7 @@ namespace ContosoUniversity.Features.Instructors
                     .ThenInclude(c => c.Course)
                     .OrderBy(i => i.LastName)
                     .ProjectTo<Model.Instructor>()
-                    .ToListAsync()
-                    ;
-
-                // EF Core cannot project child collections w/o Include
-                // See https://github.com/aspnet/EntityFrameworkCore/issues/9128
-                //var instructors = await _db.Instructors
-                //    .OrderBy(i => i.LastName)
-                //    .ProjectToListAsync<Model.Instructor>();
+                    .ToListAsync();
 
                 var courses = new List<Model.Course>();
                 var enrollments = new List<Model.Enrollment>();
@@ -102,10 +97,10 @@ namespace ContosoUniversity.Features.Instructors
                         .ToListAsync();
                 }
 
-                if (message.CourseID != null)
+                if (message.CourseId != null)
                 {
                     enrollments = await _db.Enrollments
-                        .Where(x => x.CourseID == message.CourseID)
+                        .Where(x => x.CourseID == message.CourseId)
                         .ProjectTo<Model.Enrollment>()
                         .ToListAsync();
                 }
@@ -115,8 +110,8 @@ namespace ContosoUniversity.Features.Instructors
                     Instructors = instructors,
                     Courses = courses,
                     Enrollments = enrollments,
-                    InstructorID = message.Id,
-                    CourseID = message.CourseID
+                    InstructorId = message.Id,
+                    CourseId = message.CourseId
                 };
 
                 return viewModel;

@@ -1,16 +1,16 @@
-﻿using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using MediatR;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.Features.Courses
 {
+    //TODO : 04 - Simple Command with response
     public class Create
     {
         public class Command : IRequest<int>
         {
-            [IgnoreMap]
             public int Number { get; set; }
             public string Title { get; set; }
             public int Credits { get; set; }

@@ -1,24 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ContosoUniversity.Features.Instructors
 {
+    //TODO : 05 - Complex Command
     public class CreateEdit
     {
         public class Query : IRequest<Command>
         {
             public int? Id { get; set; }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public class QueryValidator : AbstractValidator<Query>
         {
@@ -27,6 +42,23 @@ namespace ContosoUniversity.Features.Instructors
                 RuleFor(m => m.Id).NotNull();
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         public class Command : IRequest<int>
@@ -59,16 +91,27 @@ namespace ContosoUniversity.Features.Instructors
 
             public class AssignedCourseData
             {
-                public int CourseID { get; set; }
+                public int CourseId { get; set; }
                 public string Title { get; set; }
                 public bool Assigned { get; set; }
             }
 
             public class CourseAssignment
             {
-                public int CourseID { get; set; }
+                public int CourseId { get; set; }
             }
         }
+
+
+
+
+
+
+
+
+
+
+
 
         public class CommandValidator : AbstractValidator<Command>
         {
@@ -79,6 +122,38 @@ namespace ContosoUniversity.Features.Instructors
                 RuleFor(m => m.HireDate).NotNull();
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         public class QueryHandler : AsyncRequestHandler<Query, Command>
         {
@@ -101,9 +176,6 @@ namespace ContosoUniversity.Features.Instructors
                         .Where(i => i.Id == message.Id)
                         .ProjectTo<Command>()
                         .SingleOrDefaultAsync<Command>();
-
-                    //.ProjectTo<Command>()
-                    //.SingleOrDefaultAsync();
                 }
 
                 PopulateAssignedCourseData(model);
@@ -114,10 +186,10 @@ namespace ContosoUniversity.Features.Instructors
             private void PopulateAssignedCourseData(Command model)
             {
                 var allCourses = _db.Courses;
-                var instructorCourses = new HashSet<int>(model.CourseAssignments.Select(c => c.CourseID));
+                var instructorCourses = new HashSet<int>(model.CourseAssignments.Select(c => c.CourseId));
                 var viewModel = allCourses.Select(course => new Command.AssignedCourseData
                 {
-                    CourseID = course.Id,
+                    CourseId = course.Id,
                     Title = course.Title,
                     Assigned = instructorCourses.Contains(course.Id)
                 }).ToList();
@@ -126,6 +198,44 @@ namespace ContosoUniversity.Features.Instructors
 
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //TODO : 07 - DDD
         public class CommandHandler : AsyncRequestHandler<Command, int>
         {
             private readonly SchoolContext _db;

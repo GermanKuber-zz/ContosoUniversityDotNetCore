@@ -26,7 +26,7 @@
         @foreach (var item in Model.Instructors)
         {
             string selectedRow = "";
-            if (item.ID == Model.InstructorID)
+            if (item.Id == Model.InstructorId)
             {
                 selectedRow = "success";
             }
@@ -47,15 +47,15 @@
                     @{
                         foreach (var course in item.CourseAssignments)
                         {
-                            @course.CourseID @:  @course.CourseTitle <br />
+                            @course.CourseId @:  @course.CourseTitle <br />
                         }
                     }
                 </td>
                 <td>
-                    <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    <a asp-action="Index" asp-route-id="@item.Id">Select</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
             i++;
@@ -77,7 +77,7 @@
         @foreach (var item in Model.Courses)
         {
             string selectedRow = "";
-            if (item.Id == Model.CourseID)
+            if (item.Id == Model.CourseId)
             {
                 selectedRow = "success";
             }

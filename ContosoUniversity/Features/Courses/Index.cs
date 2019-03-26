@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Features.Courses
 {
+    //TODO : 01 - Simple Query
     public class Index
     {
         public class Query : IRequest<Result>
@@ -42,9 +43,7 @@ namespace ContosoUniversity.Features.Courses
                 var courses = await _db.Courses
                     .OrderBy(d => d.Id)
                     .ProjectTo<Result.Course>()
-                    .ToListAsync()
-                    //.ProjectToListAsync<Result.Course>()
-                    ;
+                    .ToListAsync();
 
                 return new Result
                 {
